@@ -1,7 +1,9 @@
 package dz.salim.salimi.e_rem.data.models
 
-data class Course (override val id: Int,
-              override val title: String,
-              override val description: String,
-              override val published_date: String,
-              override val updated_date: String): Content(id, title, description, published_date, updated_date)
+data class Course (
+    override var id: Int = 0,
+    override var title: String = "",
+    override var description: String = "",
+    override var publishedDate: String = "",
+    override var updatedDate: String = "",
+    val content: String = "") : Content()
