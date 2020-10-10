@@ -5,11 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dz.salim.salimi.e_rem.R
-import dz.salim.salimi.e_rem.data.models.Course
-import kotlinx.android.synthetic.main.fragment_course_list.*
 
 class CourseListFragment : Fragment() {
 
@@ -31,18 +30,9 @@ class CourseListFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
-        val courseList = ArrayList<Course>()
-        courseList.add(
-            Course(5, "Hello World", "HEre we go", "06.06.06. 15:30",
-                "06.06.06. 15:30", "Nothing"))
-        courseList.add(
-            Course(5, "Kebab", "Let's eat a kebab", "06.06.08. 15:30",
-                "06.06.06. 15:30", "Nothing"))
-        courseList.add(
-            Course(5, "Why should i write ?", "Idk what to write", "06.06.07. 15:30",
-                "06.06.06. 15:30", "Nothing"))
-
-        val adapter = CourseListAdapter(courseList)
+        val viewModel = ViewModelProvider(this).get(ListCourseViewModel::class.java)
+        viewModel.getListCourses()
+        val adapter = CourseListAdapter(viewModel)
         recyclerView.adapter = adapter
     }
 }

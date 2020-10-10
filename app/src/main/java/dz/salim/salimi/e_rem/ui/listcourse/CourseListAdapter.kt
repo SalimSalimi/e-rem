@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import dz.salim.salimi.e_rem.data.models.Course
 import dz.salim.salimi.e_rem.databinding.CourseItemBinding
 
-class CourseListAdapter (private val courseList: List<Course>): RecyclerView.Adapter<CourseListAdapter.CourseListVH>() {
+class CourseListAdapter (private val viewModel: ListCourseViewModel): RecyclerView.Adapter<CourseListAdapter.CourseListVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseListVH {
         val inflater = LayoutInflater.from(parent.context)
@@ -16,16 +15,16 @@ class CourseListAdapter (private val courseList: List<Course>): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: CourseListVH, position: Int) {
-        val courseItem = courseList[position]
-        holder.bind(courseItem)
+        holder.bind(position)
     }
 
     override fun getItemCount(): Int =
-        courseList.size
+        viewModel.listCourses.value!!.size
 
     inner class CourseListVH(itemView: View, private val binding: CourseItemBinding): RecyclerView.ViewHolder(itemView) {
 
-        fun bind(courseItem: Course) {
+        fun bind(position: Int) {
+            val courseItem = viewModel.listCourses.value!![position]
             binding.course = courseItem
             binding.executePendingBindings()
         }
