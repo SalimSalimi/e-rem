@@ -2,11 +2,17 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/addCourseFragment">
+    app:startDestination="@id/courseListFragment">
 
     <fragment
         android:id="@+id/addCourseFragment"
-        android:name="dz.salim.salimi.e_rem.ui.addCourse.AddCourseFragment"
+        android:name="dz.salim.salimi.e_rem.ui.addcourse.AddCourseFragment"
         android:label="AddCourseFragment" />
+    <fragment
+        android:id="@+id/courseListFragment"
+        android:name="dz.salim.salimi.e_rem.ui.listcourse.CourseListFragment"
+        android:label="fragment_course_list"
+        tools:layout="@layout/fragment_course_list" />
 </navigation>

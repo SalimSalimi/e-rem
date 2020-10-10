@@ -3,4 +3,5 @@
     <string name="title_course">Title of the course</string>
     <string name="description_course">Description of your course</string>
     <string name="add_course">Add Course</string>
+    <string name="image_course_description">Image course</string>
 </resources>

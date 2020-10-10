@@ -8,13 +8,13 @@
     <data>
         <variable
             name="addCourseViewModel"
-            type="dz.salim.salimi.e_rem.ui.addCourse.AddCourseViewModel"/>
+            type="dz.salim.salimi.e_rem.ui.addcourse.AddCourseViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.addCourse.AddCourseFragment">
+        tools:context=".ui.addcourse.AddCourseFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/title_edit"

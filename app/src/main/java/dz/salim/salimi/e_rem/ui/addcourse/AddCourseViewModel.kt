@@ -1,4 +1,4 @@
-package dz.salim.salimi.e_rem.ui.addCourse
+package dz.salim.salimi.e_rem.ui.addcourse
 
 import android.content.Context
 import android.widget.Toast
