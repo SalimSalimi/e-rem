@@ -1,4 +1,4 @@
-package dz.salim.salimi.e_rem.ui.listcourse
+package dz.salim.salimi.e_rem.ui.courselist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dz.salim.salimi.e_rem.databinding.CourseItemBinding
 
-class CourseListAdapter (private val viewModel: ListCourseViewModel): RecyclerView.Adapter<CourseListAdapter.CourseListVH>() {
+class CourseListAdapter (private val viewModel: CourseListViewModel): RecyclerView.Adapter<CourseListAdapter.CourseListVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseListVH {
         val inflater = LayoutInflater.from(parent.context)

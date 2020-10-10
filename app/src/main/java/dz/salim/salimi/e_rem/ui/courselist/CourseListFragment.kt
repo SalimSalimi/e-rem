@@ -1,4 +1,4 @@
-package dz.salim.salimi.e_rem.ui.listcourse
+package dz.salim.salimi.e_rem.ui.courselist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -30,7 +30,7 @@ class CourseListFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
-        val viewModel = ViewModelProvider(this).get(ListCourseViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(CourseListViewModel::class.java)
         viewModel.getListCourses()
         val adapter = CourseListAdapter(viewModel)
         recyclerView.adapter = adapter

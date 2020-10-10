@@ -12,7 +12,7 @@
         android:label="AddCourseFragment" />
     <fragment
         android:id="@+id/courseListFragment"
-        android:name="dz.salim.salimi.e_rem.ui.listcourse.CourseListFragment"
+        android:name="dz.salim.salimi.e_rem.ui.courselist.CourseListFragment"
         android:label="fragment_course_list"
         tools:layout="@layout/fragment_course_list" />
 </navigation>
