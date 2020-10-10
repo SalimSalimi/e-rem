@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dz.salim.salimi.e_rem.data.models.Course
+import dz.salim.salimi.e_rem.utils.getCurrentTime
 
 class AddCourseViewModel : ViewModel() {
     var context: Context? = null
@@ -18,6 +19,9 @@ class AddCourseViewModel : ViewModel() {
     }
 
     fun onAddBtnClicked() {
-        Toast.makeText(context!!, "${_course.value!!.title} and ${_course.value!!.description}",Toast.LENGTH_LONG).show()
+        _course.value?.createdDate = getCurrentTime()
+
+        Toast.makeText(context!!, "${_course.value!!.title} and ${_course.value!!.description} and ${_course.value!!.createdDate}",Toast.LENGTH_LONG).show()
+
     }
 }

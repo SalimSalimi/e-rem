@@ -24,17 +24,13 @@ class AddCourseFragment : Fragment() {
     ): View? {
         val binding: AddCourseFragmentBinding = DataBindingUtil.inflate(inflater ,R.layout.add_course_fragment,
                 container, false)
-        val addCourseViewModel = AddCourseViewModel()
+
+        val addCourseViewModel = ViewModelProvider(this).get(AddCourseViewModel::class.java)
         addCourseViewModel.context = context
         binding.addCourseViewModel = addCourseViewModel
+
         binding.lifecycleOwner = this
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddCourseViewModel::class.java)
-        
     }
 
 }
