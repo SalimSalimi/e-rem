@@ -6,4 +6,4 @@ data class Course (
     override var description: String = "",
     override var createdDate: String = "",
     override var updatedDate: String = "",
-    val content: String = "") : Content()
+    var content: String = "") : Content()

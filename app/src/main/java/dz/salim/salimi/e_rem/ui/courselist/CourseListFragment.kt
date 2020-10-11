@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavHost
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dz.salim.salimi.e_rem.R
@@ -32,6 +36,10 @@ class CourseListFragment : Fragment() {
         val viewModel = ViewModelProvider(this).get(CourseListViewModel::class.java)
         viewModel.getListCourses()
         val adapter = CourseListAdapter(viewModel)
+
+        viewModel.listCourses.observe(viewLifecycleOwner, {
+            adapter.notifyDataSetChanged()
+        })
         recyclerView.adapter = adapter
     }
 }
