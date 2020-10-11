@@ -22,7 +22,6 @@ class CourseListFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_course_list, container, false)
         recyclerView = rootView.findViewById(R.id.course_list)
         setupRecyclerView()
-
         return rootView
     }
 
