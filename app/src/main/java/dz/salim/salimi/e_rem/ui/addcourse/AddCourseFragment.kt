@@ -12,10 +12,6 @@ import dz.salim.salimi.e_rem.databinding.AddCourseFragmentBinding
 
 class AddCourseFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AddCourseFragment()
-    }
-
     private lateinit var viewModel: AddCourseViewModel
 
     override fun onCreateView(
@@ -25,9 +21,8 @@ class AddCourseFragment : Fragment() {
         val binding: AddCourseFragmentBinding = DataBindingUtil.inflate(inflater ,R.layout.add_course_fragment,
                 container, false)
 
-        val addCourseViewModel = ViewModelProvider(this).get(AddCourseViewModel::class.java)
-        addCourseViewModel.context = context
-        binding.addCourseViewModel = addCourseViewModel
+        viewModel = ViewModelProvider(this).get(AddCourseViewModel::class.java)
+        binding.addCourseViewModel = viewModel
 
         binding.lifecycleOwner = this
         return binding.root

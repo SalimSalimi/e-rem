@@ -15,7 +15,7 @@ class CourseListViewModel: ViewModel() {
 
     fun getListCourses() {
         val repository = CourseRepository()
-        _listCourses.value = ArrayList<Course>()
+        _listCourses.value = ArrayList()
         repository.getAllCourses {
             _listCourses.value = it
         }
