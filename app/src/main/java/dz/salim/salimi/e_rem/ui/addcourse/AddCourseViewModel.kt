@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dz.salim.salimi.e_rem.data.models.Course
 import dz.salim.salimi.e_rem.data.remote.FirebaseDatabase
+import dz.salim.salimi.e_rem.data.repositories.CourseRepository
 import dz.salim.salimi.e_rem.utils.getCurrentTime
 
 class AddCourseViewModel : ViewModel() {
@@ -21,9 +22,8 @@ class AddCourseViewModel : ViewModel() {
 
     fun onAddBtnClicked() {
         _course.value?.createdDate = getCurrentTime()
-
-        FirebaseDatabase.addCourse(_course.value!!)
-
+        val repository = CourseRepository()
+        repository.addCourse(_course.value!!)
         Toast.makeText(context!!, "${_course.value!!.title} and ${_course.value!!.description} and ${_course.value!!.createdDate}",Toast.LENGTH_LONG).show()
 
     }
