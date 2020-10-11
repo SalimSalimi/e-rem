@@ -22,7 +22,6 @@ class CourseListFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_course_list, container, false)
         recyclerView = rootView.findViewById(R.id.course_list)
         setupRecyclerView()
-
         return rootView
     }
 
@@ -33,6 +32,10 @@ class CourseListFragment : Fragment() {
         val viewModel = ViewModelProvider(this).get(CourseListViewModel::class.java)
         viewModel.getListCourses()
         val adapter = CourseListAdapter(viewModel)
+
+        viewModel.listCourses.observe(viewLifecycleOwner, {
+            adapter.notifyDataSetChanged()
+        })
         recyclerView.adapter = adapter
     }
 }

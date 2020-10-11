@@ -9,10 +9,18 @@
     <fragment
         android:id="@+id/addCourseFragment"
         android:name="dz.salim.salimi.e_rem.ui.addcourse.AddCourseFragment"
-        android:label="AddCourseFragment" />
+        android:label="AddCourseFragment" >
+        <action
+            android:id="@+id/action_addCourseFragment_to_courseListFragment"
+            app:destination="@id/courseListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/courseListFragment"
         android:name="dz.salim.salimi.e_rem.ui.courselist.CourseListFragment"
         android:label="fragment_course_list"
-        tools:layout="@layout/fragment_course_list" />
+        tools:layout="@layout/fragment_course_list" >
+        <action
+            android:id="@+id/action_courseListFragment_to_addCourseFragment"
+            app:destination="@id/addCourseFragment" />
+    </fragment>
 </navigation>
