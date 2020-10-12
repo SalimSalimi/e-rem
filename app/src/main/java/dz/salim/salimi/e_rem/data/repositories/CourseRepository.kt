@@ -12,4 +12,12 @@ class CourseRepository {
     fun getAllCourses(onGetCourse: ((List<Course>) -> Unit)){
         FirebaseDatabase.getAllCourses(onGetCourse)
     }
+
+    fun updateCourse(course: Course) {
+        FirebaseDatabase.updateCourse(course)
+    }
+
+    fun deleteCourse(courseKey: String) {
+        FirebaseDatabase.deleteCourse(courseKey)
+    }
 }

@@ -40,4 +40,12 @@ object FirebaseDatabase {
         reference.child(
             COURSE_REF).addValueEventListener(coursesListener)
     }
+
+    fun updateCourse(course: Course) {
+        reference.child(COURSE_REF).child(course.id).setValue(course)
+    }
+
+    fun deleteCourse(courseKey: String) {
+        reference.child(COURSE_REF).child(courseKey).removeValue()
+    }
 }
