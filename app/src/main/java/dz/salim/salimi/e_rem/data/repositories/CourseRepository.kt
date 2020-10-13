@@ -1,6 +1,6 @@
 package dz.salim.salimi.e_rem.data.repositories
 
-import dz.salim.salimi.e_rem.data.models.Course
+import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.data.remote.FirebaseDatabase
 
 class CourseRepository {

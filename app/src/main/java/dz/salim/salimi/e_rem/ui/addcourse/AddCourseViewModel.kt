@@ -1,11 +1,9 @@
 package dz.salim.salimi.e_rem.ui.addcourse
 
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dz.salim.salimi.e_rem.data.models.Course
+import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.data.repositories.CourseRepository
 import dz.salim.salimi.e_rem.utils.getCurrentTime
 

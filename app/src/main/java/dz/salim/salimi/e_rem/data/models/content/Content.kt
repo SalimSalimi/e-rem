@@ -1,4 +1,4 @@
-package dz.salim.salimi.e_rem.data.models
+package dz.salim.salimi.e_rem.data.models.content
 
 abstract class Content () {
     open var id: String = ""

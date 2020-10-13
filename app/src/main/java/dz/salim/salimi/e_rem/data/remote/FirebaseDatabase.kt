@@ -6,7 +6,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import dz.salim.salimi.e_rem.data.models.Course
+import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.utils.COURSE_REF
 
 object FirebaseDatabase {
