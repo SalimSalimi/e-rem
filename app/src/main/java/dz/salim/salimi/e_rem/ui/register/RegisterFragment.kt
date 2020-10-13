@@ -12,7 +12,7 @@ import dz.salim.salimi.e_rem.databinding.RegisterFragmentBinding
 
 class RegisterFragment : Fragment() {
 
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var registerViewModel: RegisterViewModel
     private lateinit var binding: RegisterFragmentBinding
 
     override fun onCreateView(
@@ -25,7 +25,8 @@ class RegisterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        binding.registerViewModel = registerViewModel
     }
 
 }
