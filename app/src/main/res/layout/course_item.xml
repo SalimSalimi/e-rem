@@ -6,7 +6,7 @@
     <data>
         <variable
             name="course"
-            type="dz.salim.salimi.e_rem.data.models.Course" />
+            type="dz.salim.salimi.e_rem.data.models.content.Course" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

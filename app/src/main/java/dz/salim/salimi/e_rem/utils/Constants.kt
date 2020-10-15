@@ -4,3 +4,4 @@ package dz.salim.salimi.e_rem.utils
 
 //References
 const val COURSE_REF = "Course"
+const val TEACHER_REF = "Teacher"
