@@ -26,17 +26,5 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun register() {
-        val ref = Firebase.database.reference
-        val auth = Firebase.auth
-        auth.createUserWithEmailAndPassword(_login.value!!.email, _login.value!!.password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val uid = auth.currentUser!!.uid
-                    _teacher.value!!.id = uid
-                    ref.child("Teacher").setValue(_teacher.value!!)
-                } else {
-                    Log.d("RegisterViewModel", "Unsuccessful")
-                }
-            }
     }
 }

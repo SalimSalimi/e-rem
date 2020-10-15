@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavHost
+import androidx.navigation.fragment.findNavController
 import dz.salim.salimi.e_rem.R
 import dz.salim.salimi.e_rem.databinding.FragmentLoginBinding
 
@@ -16,11 +18,18 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val binding: FragmentLoginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login,
             container, false)
 
         val viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel.onLoginSuccessful.observe(viewLifecycleOwner) {
+            if (it == true) {
+                this.findNavController().navigate(
+                    R.id.action_loginFragment_to_courseListFragment
+                )
+                viewModel.doneLogin()
+            }
+        }
         binding.loginViewModel = viewModel
         return binding.root
     }

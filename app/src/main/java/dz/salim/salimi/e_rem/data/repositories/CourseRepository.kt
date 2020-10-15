@@ -1,23 +1,23 @@
 package dz.salim.salimi.e_rem.data.repositories
 
 import dz.salim.salimi.e_rem.data.models.content.Course
-import dz.salim.salimi.e_rem.data.remote.FirebaseDatabase
+import dz.salim.salimi.e_rem.data.remote.DataFirebase
 
 class CourseRepository {
 
     fun addCourse(course: Course) {
-        FirebaseDatabase.addCourse(course)
+        DataFirebase.addCourse(course)
     }
 
     fun getAllCourses(onGetCourse: ((List<Course>) -> Unit)){
-        FirebaseDatabase.getAllCourses(onGetCourse)
+        DataFirebase.getAllCourses(onGetCourse)
     }
 
     fun updateCourse(course: Course) {
-        FirebaseDatabase.updateCourse(course)
+        DataFirebase.updateCourse(course)
     }
 
     fun deleteCourse(courseKey: String) {
-        FirebaseDatabase.deleteCourse(courseKey)
+        DataFirebase.deleteCourse(courseKey)
     }
 }

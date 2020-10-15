@@ -9,7 +9,7 @@ import com.google.firebase.ktx.Firebase
 import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.utils.COURSE_REF
 
-object FirebaseDatabase {
+object DataFirebase {
 
     private val database = Firebase.database
     private val reference = database.reference
