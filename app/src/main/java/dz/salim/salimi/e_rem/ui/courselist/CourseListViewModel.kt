@@ -13,11 +13,11 @@ class CourseListViewModel: ViewModel() {
     val listCourses : LiveData<List<Course>>
         get() = _listCourses
 
-    fun getListCourses() {
-        val repository = CourseRepository()
-        _listCourses.value = ArrayList()
-        repository.getAllCourses {
-            _listCourses.value = it
-        }
+    init {
+        getListCourses()
+    }
+
+    private fun getListCourses() {
+        CourseRepository.getAllCourses(_listCourses)
     }
 }
