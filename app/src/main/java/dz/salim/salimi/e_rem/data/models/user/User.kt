@@ -1,6 +1,8 @@
 package dz.salim.salimi.e_rem.data.models.user
 
-abstract class User () {
+import dz.salim.salimi.e_rem.data.models.Entity
+
+abstract class User (): Entity() {
     open var id: String = ""
     open var firstName: String = ""
     open var lastName: String = ""
