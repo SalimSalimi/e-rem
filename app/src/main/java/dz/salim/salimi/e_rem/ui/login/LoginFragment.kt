@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun onLoginObserve() {
-        viewModel.onLoginSuccessful.observe(viewLifecycleOwner) {
+        viewModel.onLoginResponse.observe(viewLifecycleOwner) {
             if (it == true) {
                 this.findNavController().navigate(
                     R.id.action_loginFragment_to_courseListFragment
