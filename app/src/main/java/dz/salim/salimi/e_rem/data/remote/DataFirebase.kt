@@ -1,13 +1,16 @@
 package dz.salim.salimi.e_rem.data.remote
 
 import android.util.Log
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import dz.salim.salimi.e_rem.data.models.content.Course
+import dz.salim.salimi.e_rem.data.models.user.Teacher
 import dz.salim.salimi.e_rem.utils.COURSE_REF
+import dz.salim.salimi.e_rem.utils.TEACHER_REF
 
 object DataFirebase {
 
@@ -47,5 +50,10 @@ object DataFirebase {
 
     fun deleteCourse(courseKey: String) {
         reference.child(COURSE_REF).child(courseKey).removeValue()
+    }
+
+    fun addTeacher(teacher: Teacher): Task<Void> {
+        return reference.child(TEACHER_REF).child(teacher.id)
+            .setValue(teacher)
     }
 }
