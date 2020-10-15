@@ -14,9 +14,9 @@ class LoginViewModel: ViewModel() {
     val login: LiveData<Login>
         get() = _login
 
-    private val _onLoginSuccessful = MutableLiveData<Boolean?>()
-    val onLoginSuccessful: LiveData<Boolean?>
-        get() = _onLoginSuccessful
+    private val _onLoginResponse = MutableLiveData<Boolean?>()
+    val onLoginResponse: LiveData<Boolean?>
+        get() = _onLoginResponse
 
     private val _navigateToRegister = MutableLiveData<Boolean?>()
     val navigateToRegister: LiveData<Boolean?>
@@ -29,7 +29,7 @@ class LoginViewModel: ViewModel() {
     private fun login() {
         AuthRepository.loginUser(_login.value!!) { success: Boolean?, exception: Exception? ->
             Log.d("LoginViewModel", "$success")
-            _onLoginSuccessful.postValue(success)
+            _onLoginResponse.postValue(success)
         }
     }
 
@@ -42,7 +42,7 @@ class LoginViewModel: ViewModel() {
     }
 
     fun doneLogin() {
-        this._onLoginSuccessful.value = null
+        this._onLoginResponse.value = null
     }
 
     fun doneNavigatingRegister() {
