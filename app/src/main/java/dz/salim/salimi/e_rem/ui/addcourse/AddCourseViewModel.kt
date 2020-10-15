@@ -19,7 +19,6 @@ class AddCourseViewModel : ViewModel() {
 
     fun onAddBtnClicked() {
         _course.value?.createdDate = getCurrentTime()
-        val repository = CourseRepository()
-        repository.addCourse(_course.value!!)
+        CourseRepository.addCourse(_course.value!!)
     }
 }

@@ -1,23 +1,25 @@
 package dz.salim.salimi.e_rem.data.repositories
 
+import androidx.lifecycle.MutableLiveData
 import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.data.remote.DataFirebase
+import dz.salim.salimi.e_rem.utils.COURSE_REF
 
-class CourseRepository {
+object CourseRepository {
 
     fun addCourse(course: Course) {
-        DataFirebase.addCourse(course)
-    }
-
-    fun getAllCourses(onGetCourse: ((List<Course>) -> Unit)){
-        DataFirebase.getAllCourses(onGetCourse)
+        DataFirebase.addEntity(course, COURSE_REF)
     }
 
     fun updateCourse(course: Course) {
-        DataFirebase.updateCourse(course)
+        DataFirebase.updateEntity(course, COURSE_REF)
     }
 
-    fun deleteCourse(courseKey: String) {
-        DataFirebase.deleteCourse(courseKey)
+    fun deleteCourse(course: Course) {
+        DataFirebase.deleteEntity(course, COURSE_REF)
+    }
+
+    fun getAllCourses(data: MutableLiveData<List<Course>>){
+        DataFirebase.getAll(data, COURSE_REF)
     }
 }

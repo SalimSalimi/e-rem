@@ -1,7 +1,9 @@
 package dz.salim.salimi.e_rem.data.models.user
 
-abstract class User () {
-    open var id: String = ""
+import dz.salim.salimi.e_rem.data.models.Entity
+
+abstract class User : Entity() {
+    override var id: String = ""
     open var firstName: String = ""
     open var lastName: String = ""
     open var location: String = ""

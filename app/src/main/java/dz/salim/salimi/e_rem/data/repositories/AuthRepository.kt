@@ -1,27 +1,27 @@
 package dz.salim.salimi.e_rem.data.repositories
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.google.firebase.auth.FirebaseAuth
 import dz.salim.salimi.e_rem.data.models.user.Login
 import dz.salim.salimi.e_rem.data.models.user.Teacher
 import dz.salim.salimi.e_rem.data.remote.AuthFirebase
 import dz.salim.salimi.e_rem.data.remote.DataFirebase
+import dz.salim.salimi.e_rem.utils.TEACHER_REF
 import java.lang.Exception
 
 object AuthRepository {
 
-    fun loginUser(login: Login, onLoginSuccess: ((Boolean?, Exception?) -> Unit)) {
+    fun loginUser(login: Login, onLoginResponse: ((Boolean?, Exception?) -> Unit)) {
         AuthFirebase.loginWithEmail(login.email, login.password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    onLoginSuccess(true, null)
+                    onLoginResponse(true, null)
                 } else {
-                    onLoginSuccess(false, null)
+                    onLoginResponse(false, null)
                 }
                 Log.d("AuthRepo", "${it.exception?.message}")
             }.addOnFailureListener {
-                    onLoginSuccess(null, it)
+                    onLoginResponse(null, it)
             }
     }
 
@@ -31,7 +31,7 @@ object AuthRepository {
                 if (task.isSuccessful) {
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
                     teacher.id = uid
-                    DataFirebase.addTeacher(teacher).addOnCompleteListener {
+                    DataFirebase.addEntity(teacher, TEACHER_REF)?.addOnCompleteListener {
                         if (it.isSuccessful) {
                             onRegisterResponse(true, null)
                         } else {

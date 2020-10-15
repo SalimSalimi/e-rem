@@ -19,7 +19,7 @@ class CourseListAdapter (private val viewModel: CourseListViewModel): RecyclerVi
     }
 
     override fun getItemCount(): Int =
-        viewModel.listCourses.value!!.size
+        viewModel.listCourses.value?.size ?: 0
 
     inner class CourseListVH(itemView: View, private val binding: CourseItemBinding): RecyclerView.ViewHolder(itemView) {
 
