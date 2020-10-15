@@ -7,6 +7,7 @@ import dz.salim.salimi.e_rem.data.models.user.Login
 import dz.salim.salimi.e_rem.data.models.user.Teacher
 import dz.salim.salimi.e_rem.data.remote.AuthFirebase
 import dz.salim.salimi.e_rem.data.remote.DataFirebase
+import dz.salim.salimi.e_rem.utils.TEACHER_REF
 import java.lang.Exception
 
 object AuthRepository {
@@ -31,7 +32,7 @@ object AuthRepository {
                 if (task.isSuccessful) {
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
                     teacher.id = uid
-                    DataFirebase.addTeacher(teacher).addOnCompleteListener {
+                    DataFirebase.addEntity(teacher, TEACHER_REF)?.addOnCompleteListener {
                         if (it.isSuccessful) {
                             onRegisterResponse(true, null)
                         } else {

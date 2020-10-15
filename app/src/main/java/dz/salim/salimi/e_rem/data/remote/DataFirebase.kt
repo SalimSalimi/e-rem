@@ -7,8 +7,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import dz.salim.salimi.e_rem.data.models.Entity
+import dz.salim.salimi.e_rem.data.models.content.Content
 import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.data.models.user.Teacher
+import dz.salim.salimi.e_rem.data.models.user.User
 import dz.salim.salimi.e_rem.utils.COURSE_REF
 import dz.salim.salimi.e_rem.utils.TEACHER_REF
 
@@ -17,10 +20,21 @@ object DataFirebase {
     private val database = Firebase.database
     private val reference = database.reference
 
-    fun addCourse(course: Course) {
-        val newCourse = reference.child(COURSE_REF).push()
-        course.id = newCourse.key!!
-        newCourse.setValue(course)
+    fun <T : Entity> addEntity(entity: T, firebaseRef: String): Task<Void>? {
+        return when (entity) {
+            is User -> {
+                reference.child(firebaseRef).child(entity.id)
+                    .setValue(entity)
+            }
+            is Content -> {
+                val newEntity = reference.child(firebaseRef).push()
+                entity.id = newEntity.key!!
+                newEntity.setValue(entity)
+            }
+            else -> {
+                return null
+            }
+        }
     }
 
     fun getAllCourses(onGetCourse: ((List<Course>) -> Unit)) {
@@ -52,8 +66,4 @@ object DataFirebase {
         reference.child(COURSE_REF).child(courseKey).removeValue()
     }
 
-    fun addTeacher(teacher: Teacher): Task<Void> {
-        return reference.child(TEACHER_REF).child(teacher.id)
-            .setValue(teacher)
-    }
 }
