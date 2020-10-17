@@ -3,6 +3,8 @@ package dz.salim.salimi.e_rem.ui.addcourse
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.data.repositories.CourseRepository
 import dz.salim.salimi.e_rem.utils.getCurrentTime
@@ -15,6 +17,7 @@ class AddCourseViewModel : ViewModel() {
 
     init {
         _course.value = Course()
+        _course.value?.creatorId = Firebase.auth.currentUser!!.uid
     }
 
     fun onAddBtnClicked() {

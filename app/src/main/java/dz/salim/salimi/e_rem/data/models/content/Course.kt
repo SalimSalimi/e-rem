@@ -6,4 +6,5 @@ data class Course (
     override var description: String = "",
     override var createdDate: String = "",
     override var updatedDate: String = "",
+    override var creatorId: String = "",
     var content: String = "") : Content()

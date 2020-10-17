@@ -8,4 +8,5 @@ abstract class Content : Entity() {
     open var description: String = ""
     open var createdDate: String = ""
     open var updatedDate: String = ""
+    open var creatorId: String = ""
 }
