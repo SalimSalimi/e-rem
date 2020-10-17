@@ -63,4 +63,30 @@ object DataFirebase {
             firebaseRef).addValueEventListener(listener)
     }
 
+    inline fun <reified T: Entity> getAllByFirstChild(
+        liveData: MutableLiveData<List<T>>, firebaseRef: String,
+        childRef: String, childValue: Any) {
+
+        val listData = ArrayList<T>()
+        val listener = object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                listData.clear()
+                snapshot.children.forEach { entityChild ->
+                    if (entityChild.child(childRef).value == childValue) {
+                        val entity = entityChild.getValue(T::class.java)
+                        listData.add(entity!!)
+                    }
+                }
+                liveData.postValue(listData)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                liveData.postValue(listData)
+                Log.d("FIREBASE_ERROR", "Can't retrieve data ${error.toException().message}")
+            }
+        }
+        reference.child(
+            firebaseRef).addValueEventListener(listener)
+    }
+
 }

@@ -4,9 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import dz.salim.salimi.e_rem.data.models.user.Login
 import dz.salim.salimi.e_rem.data.models.user.Teacher
 import dz.salim.salimi.e_rem.data.repositories.AuthRepository

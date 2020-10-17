@@ -23,12 +23,12 @@ class LoginViewModel: ViewModel() {
         get() = _navigateToRegister
 
     init {
-        _login.value = Login()
+        _login.value = Login("h@gmail.com", "sasa42+")
     }
 
     private fun login() {
         AuthRepository.loginUser(_login.value!!) { success: Boolean?, exception: Exception? ->
-            Log.d("LoginViewModel", "$success")
+            Log.d("LoginViewModel", "${exception?.message}")
             _onLoginResponse.postValue(success)
         }
     }
