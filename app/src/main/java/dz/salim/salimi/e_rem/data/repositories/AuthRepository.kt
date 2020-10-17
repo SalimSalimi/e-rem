@@ -11,6 +11,8 @@ import java.lang.Exception
 
 object AuthRepository {
 
+    val LOGGED_IN_USER_UID = AuthFirebase.loggedInUserUid()
+
     fun loginUser(login: Login, onLoginResponse: ((Boolean?, Exception?) -> Unit)) {
         AuthFirebase.loginWithEmail(login.email, login.password)
             .addOnCompleteListener {

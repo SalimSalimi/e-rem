@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dz.salim.salimi.e_rem.data.models.content.Course
+import dz.salim.salimi.e_rem.data.repositories.AuthRepository
 import dz.salim.salimi.e_rem.data.repositories.CourseRepository
 import dz.salim.salimi.e_rem.utils.getCurrentTime
 
@@ -15,6 +16,7 @@ class AddCourseViewModel : ViewModel() {
 
     init {
         _course.value = Course()
+        _course.value?.creatorId = AuthRepository.LOGGED_IN_USER_UID
     }
 
     fun onAddBtnClicked() {

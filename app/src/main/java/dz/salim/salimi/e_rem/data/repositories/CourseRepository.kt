@@ -22,4 +22,8 @@ object CourseRepository {
     fun getAllCourses(data: MutableLiveData<List<Course>>){
         DataFirebase.getAll(data, COURSE_REF)
     }
+
+    fun getAllCoursesByUserId(data: MutableLiveData<List<Course>>, userId: String) {
+        DataFirebase.getAllByFirstChild(data, COURSE_REF, "creatorId", userId)
+    }
 }

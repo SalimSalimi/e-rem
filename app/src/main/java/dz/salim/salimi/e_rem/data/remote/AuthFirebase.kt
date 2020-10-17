@@ -16,4 +16,7 @@ object AuthFirebase {
     fun loginWithEmail(email: String, password: String): Task<AuthResult> =
         auth.signInWithEmailAndPassword(email, password)
 
+    fun loggedInUserUid(): String {
+        return auth.currentUser!!.uid
+    }
 }
