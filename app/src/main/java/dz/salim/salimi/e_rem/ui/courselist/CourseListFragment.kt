@@ -1,49 +1,52 @@
 package dz.salim.salimi.e_rem.ui.courselist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dz.salim.salimi.e_rem.R
-import kotlinx.android.synthetic.main.fragment_course_list.view.*
+import dz.salim.salimi.e_rem.databinding.FragmentCourseListBinding
 
 class CourseListFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: CourseListViewModel
     private lateinit var adapter: CourseListAdapter
+    private lateinit var binding: FragmentCourseListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_course_list, container, false)
-        recyclerView = rootView.findViewById(R.id.course_list)
-
-        rootView.button2.setOnClickListener {
-            onAddBtnClicked()
-        }
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_course_list, container, false)
 
         setupRecyclerView()
-        return rootView
+        return binding.root
     }
 
     private fun setupRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(context)
-        recyclerView.layoutManager = linearLayoutManager
+        binding.courseList.layoutManager = linearLayoutManager
 
         viewModel = ViewModelProvider(this).get(CourseListViewModel::class.java)
-        adapter = CourseListAdapter(viewModel)
 
+        val listener = CourseListener{
+            viewModel.onSetCourseId(it)
+        }
+
+        adapter = CourseListAdapter(viewModel, listener)
+        binding.courseListViewModel = viewModel
         observeListCourses()
+        observeNavigationToAddCourse()
 
-        recyclerView.adapter = adapter
+        binding.courseList.adapter = adapter
     }
 
     private fun observeListCourses() {
@@ -52,10 +55,19 @@ class CourseListFragment : Fragment() {
         })
     }
 
-    private fun onAddBtnClicked() {
-        this.findNavController().navigate(
-            R.id.action_courseListFragment_to_addCourseFragment
-        )
+    private fun observeNavigationToAddCourse() {
+        viewModel.navigateToAddCourse.observe(viewLifecycleOwner) {
+            if (it == true){
+                navigateToAddCourse()
+                Log.d("CourseListFragment", "clicked")
+            }
+        }
+        viewModel.doneNavigatingToAddCourse()
+    }
+
+    private fun navigateToAddCourse() {
+        val direction = CourseListFragmentDirections.actionCourseListFragmentToAddCourseFragment(viewModel.selectedCourseId.value)
+        this.findNavController().navigate(direction)
     }
 
 }

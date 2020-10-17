@@ -6,14 +6,22 @@
     <data>
         <variable
             name="course"
-            type="dz.salim.salimi.e_rem.data.models.content.Course" />
+            type="dz.salim.salimi.e_rem.data.models.content.Course"/>
+        <variable
+            name="listener"
+            type="dz.salim.salimi.e_rem.ui.courselist.CourseListener"/>
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardElevation="6dp">
+        app:cardElevation="3dp"
+        app:cardCornerRadius="5dp"
+        android:foreground="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> listener.onClick(course)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
