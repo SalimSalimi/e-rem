@@ -14,20 +14,23 @@ import dz.salim.salimi.e_rem.databinding.AddCourseFragmentBinding
 
 class AddCourseFragment : Fragment() {
 
-    val args: AddCourseFragmentArgs by navArgs()
+    private val args: AddCourseFragmentArgs by navArgs()
     private lateinit var viewModel: AddCourseViewModel
+    private lateinit var binding: AddCourseFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: AddCourseFragmentBinding = DataBindingUtil.inflate(inflater ,R.layout.add_course_fragment,
+        binding = DataBindingUtil.inflate(inflater ,R.layout.add_course_fragment,
                 container, false)
 
-        viewModel = ViewModelProvider(this).get(AddCourseViewModel::class.java)
+        val idArg = args.courseId
+        val viewModelFactory = AddCourseViewModelFactory(idArg)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(AddCourseViewModel::class.java)
+
         binding.addCourseViewModel = viewModel
-        val arg = args.courseId
-        Log.d("AddCourseFragment", "$arg")
         binding.lifecycleOwner = this
         return binding.root
     }

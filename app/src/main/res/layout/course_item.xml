@@ -13,12 +13,14 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardElevation="3dp"
         app:cardCornerRadius="5dp"
         android:foreground="?selectableItemBackground"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{() -> listener.onClick(course)}">
