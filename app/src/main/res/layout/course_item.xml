@@ -12,6 +12,7 @@
             type="dz.salim.salimi.e_rem.ui.courselist.CourseListener"/>
     </data>
 
+    <!--suppress AndroidUnknownAttribute -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -23,7 +24,8 @@
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{() -> listener.onClick(course)}">
+        android:onClick="@{() -> listener.onClick(course)}"
+        android:onLongClick="@{(view) -> listener.onLongClick(view, course)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

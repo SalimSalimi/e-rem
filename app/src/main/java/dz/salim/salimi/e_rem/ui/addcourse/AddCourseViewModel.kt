@@ -1,6 +1,5 @@
 package dz.salim.salimi.e_rem.ui.addcourse
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,7 @@ import dz.salim.salimi.e_rem.data.repositories.AuthRepository
 import dz.salim.salimi.e_rem.data.repositories.CourseRepository
 import dz.salim.salimi.e_rem.utils.getCurrentTime
 
-class AddCourseViewModel (val courseId: String?): ViewModel() {
+class AddCourseViewModel (private val courseId: String?): ViewModel() {
 
     private val _course = MutableLiveData<Course>()
     val course : LiveData<Course>

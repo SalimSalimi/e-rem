@@ -1,7 +1,6 @@
 package dz.salim.salimi.e_rem.ui.courselist
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import dz.salim.salimi.e_rem.R
+import dz.salim.salimi.e_rem.data.models.content.Course
 import dz.salim.salimi.e_rem.databinding.FragmentCourseListBinding
 
 class CourseListFragment : Fragment() {
@@ -37,9 +37,20 @@ class CourseListFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(CourseListViewModel::class.java)
 
-        val listener = CourseListener{
+        val clickListener: ((courseId: String?) -> Unit) = {
             viewModel.onSetCourseId(it)
         }
+
+        val longClickListener: ((view: View, course: Course) -> Boolean) = { view, course ->
+            if (view is MaterialCardView) {
+                onCheckedCard(course, view)
+                view.toggle()
+            }
+            true
+        }
+
+
+        val listener = CourseListener(clickListener, longClickListener)
 
         adapter = CourseListAdapter(viewModel, listener)
         binding.courseListViewModel = viewModel
@@ -57,17 +68,26 @@ class CourseListFragment : Fragment() {
 
     private fun observeNavigationToAddCourse() {
         viewModel.navigateToAddCourse.observe(viewLifecycleOwner) {
-            if (it == true){
+            if (it == true) {
                 navigateToAddCourse()
-                Log.d("CourseListFragment", "clicked")
             }
         }
         viewModel.doneNavigatingToAddCourse()
     }
 
     private fun navigateToAddCourse() {
-        val direction = CourseListFragmentDirections.actionCourseListFragmentToAddCourseFragment(viewModel.selectedCourseId.value)
+        val direction =
+            CourseListFragmentDirections.actionCourseListFragmentToAddCourseFragment(viewModel.selectedCourseId.value)
         this.findNavController().navigate(direction)
     }
 
+    private fun onCheckedCard(course: Course, view: MaterialCardView) {
+        view.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                viewModel.onSelectCourse(course)
+            } else {
+                viewModel.onUnSelectCourse(course)
+            }
+        }
+    }
 }

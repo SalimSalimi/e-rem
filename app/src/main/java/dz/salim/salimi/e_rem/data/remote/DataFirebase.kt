@@ -96,7 +96,6 @@ object DataFirebase {
         val listener = object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach { entityChild ->
-                    Log.d("DataFirebase", "${entityChild.child(childRef).value}")
                     if (entityChild.child(childRef).value == childValue) {
                         val data = entityChild.getValue(T::class.java)
                         liveData.postValue(data)

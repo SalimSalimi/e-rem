@@ -22,17 +22,28 @@ class CourseListViewModel: ViewModel() {
     val navigateToAddCourse: LiveData<Boolean?>
         get() = _navigateToAddCourse
 
+    private val selectedCourses = ArrayList<Course>()
+
     init {
         initListCourses()
     }
 
-    private fun initListCourses() {
-        CourseRepository.getAllCoursesByUserId(_listCourses, AuthRepository.LOGGED_IN_USER_UID)
-    }
-
     fun onAddBtnClicked() {
         _navigateToAddCourse.value = true
-        Log.d("CourseListViewModel", "clicked")
+    }
+
+    fun onDeleteBtnClicked() {
+        deleteCourses()
+    }
+
+    fun onSelectCourse(course: Course) {
+        selectedCourses.add(course)
+        Log.d("CourseListViewModel", "add: ${selectedCourses.size}")
+    }
+
+    fun onUnSelectCourse(course: Course) {
+        selectedCourses.remove(course)
+        Log.d("CourseListViewModel", "remove: ${selectedCourses.size}")
     }
 
     fun onSetCourseId(courseId: String?) {
@@ -45,4 +56,15 @@ class CourseListViewModel: ViewModel() {
         _selectedCourseId.value = null
     }
 
+    private fun initListCourses() {
+        CourseRepository.getAllCoursesByUserId(_listCourses, AuthRepository.LOGGED_IN_USER_UID)
+    }
+
+    private fun deleteCourses() {
+        if (selectedCourses.size > 0) {
+            for (course in selectedCourses) {
+                CourseRepository.deleteCourse(course)
+            }
+        }
+    }
 }
