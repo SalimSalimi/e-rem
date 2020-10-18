@@ -24,26 +24,41 @@ class CourseListViewModel: ViewModel() {
 
     private val selectedCourses = ArrayList<Course>()
 
+    private val _numberSelectedCourses = MutableLiveData<Int>()
+    val numberSelectedCourses: LiveData<Int>
+        get() = _numberSelectedCourses
+
     init {
         initListCourses()
+        _numberSelectedCourses.value = 0
     }
 
-    fun onAddBtnClicked() {
+    fun onFloatBtnAction() {
+        if (_numberSelectedCourses.value == 0) {
+            onAddBtn()
+        } else {
+            onDeleteBtn()
+        }
+    }
+
+    private fun onAddBtn() {
         _navigateToAddCourse.value = true
     }
 
-    fun onDeleteBtnClicked() {
+    private fun onDeleteBtn() {
         deleteCourses()
     }
 
     fun onSelectCourse(course: Course) {
         selectedCourses.add(course)
-        Log.d("CourseListViewModel", "add: ${selectedCourses.size}")
+        _numberSelectedCourses.value = _numberSelectedCourses.value!!.inc()
+
+        Log.d("CourseViewModel", "${_numberSelectedCourses.value}")
     }
 
     fun onUnSelectCourse(course: Course) {
         selectedCourses.remove(course)
-        Log.d("CourseListViewModel", "remove: ${selectedCourses.size}")
+        _numberSelectedCourses.value = _numberSelectedCourses.value!!.dec()
     }
 
     fun onSetCourseId(courseId: String?) {
@@ -64,6 +79,7 @@ class CourseListViewModel: ViewModel() {
         if (selectedCourses.size > 0) {
             for (course in selectedCourses) {
                 CourseRepository.deleteCourse(course)
+                _numberSelectedCourses.value!!.times(0)
             }
         }
     }

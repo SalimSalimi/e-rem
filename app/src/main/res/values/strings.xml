@@ -14,4 +14,5 @@
     <string name="location">Location</string>
     <string name="school_name">School Name</string>
     <string name="register">Register</string>
+    <string name="click_to_add_new_course_description">Click to Add new Course</string>
 </resources>

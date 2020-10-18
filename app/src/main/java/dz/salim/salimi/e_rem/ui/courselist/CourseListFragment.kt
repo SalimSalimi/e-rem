@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.card.MaterialCardView
 import dz.salim.salimi.e_rem.R
 import dz.salim.salimi.e_rem.data.models.content.Course
@@ -19,6 +19,7 @@ class CourseListFragment : Fragment() {
     private lateinit var viewModel: CourseListViewModel
     private lateinit var adapter: CourseListAdapter
     private lateinit var binding: FragmentCourseListBinding
+    private var numberSelectedCards = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +33,8 @@ class CourseListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val linearLayoutManager = LinearLayoutManager(context)
-        binding.courseList.layoutManager = linearLayoutManager
+        val gridLayoutManager = GridLayoutManager(context, 2)
+        binding.courseList.layoutManager = gridLayoutManager
 
         viewModel = ViewModelProvider(this).get(CourseListViewModel::class.java)
 
@@ -49,13 +50,14 @@ class CourseListFragment : Fragment() {
             true
         }
 
-
         val listener = CourseListener(clickListener, longClickListener)
 
         adapter = CourseListAdapter(viewModel, listener)
         binding.courseListViewModel = viewModel
+
         observeListCourses()
         observeNavigationToAddCourse()
+        observeNumberSelectedCourses()
 
         binding.courseList.adapter = adapter
     }
@@ -75,6 +77,13 @@ class CourseListFragment : Fragment() {
         viewModel.doneNavigatingToAddCourse()
     }
 
+    private fun observeNumberSelectedCourses() {
+        viewModel.numberSelectedCourses.observe(viewLifecycleOwner) {
+            numberSelectedCards = it
+            binding.courseList.adapter!!.notifyDataSetChanged()
+        }
+    }
+
     private fun navigateToAddCourse() {
         val direction =
             CourseListFragmentDirections.actionCourseListFragmentToAddCourseFragment(viewModel.selectedCourseId.value)
@@ -82,12 +91,26 @@ class CourseListFragment : Fragment() {
     }
 
     private fun onCheckedCard(course: Course, view: MaterialCardView) {
-        view.setOnCheckedChangeListener { _, isChecked ->
+        view.setOnCheckedChangeListener { card, isChecked ->
+
             if (isChecked) {
                 viewModel.onSelectCourse(course)
             } else {
                 viewModel.onUnSelectCourse(course)
             }
+            toggleFloatButtonImage()
         }
     }
+
+    private fun toggleFloatButtonImage() {
+        when  {
+            numberSelectedCards < 0 ->
+                numberSelectedCards = 0
+            numberSelectedCards >= 1 ->
+                binding.addBtnCourse.setImageResource(R.drawable.ic_delete_24)
+            numberSelectedCards == 0 ->
+                binding.addBtnCourse.setImageResource(R.drawable.ic_add_24)
+        }
+    }
+
 }
