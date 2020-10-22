@@ -28,6 +28,10 @@ class CourseListViewModel: ViewModel() {
     val numberSelectedCourses: LiveData<Int>
         get() = _numberSelectedCourses
 
+    private val _showSnackBar = MutableLiveData<Boolean?>()
+    val showSnackBar: LiveData<Boolean?>
+        get() = _showSnackBar
+
     init {
         initListCourses()
         _numberSelectedCourses.value = 0
@@ -71,6 +75,10 @@ class CourseListViewModel: ViewModel() {
         _selectedCourseId.value = null
     }
 
+    fun doneShowSnackBar() {
+        _showSnackBar.value = null
+    }
+
     private fun initListCourses() {
         CourseRepository.getAllCoursesByUserId(_listCourses, AuthRepository.LOGGED_IN_USER_UID)
     }
@@ -80,6 +88,7 @@ class CourseListViewModel: ViewModel() {
             for (course in selectedCourses) {
                 CourseRepository.deleteCourse(course)
                 _numberSelectedCourses.value!!.times(0)
+                _showSnackBar.value = true
             }
         }
     }
