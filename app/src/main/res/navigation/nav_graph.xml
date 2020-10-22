@@ -13,6 +13,11 @@
         <action
             android:id="@+id/action_addCourseFragment_to_courseListFragment"
             app:destination="@id/courseListFragment" />
+        <argument
+            android:name="courseId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
     </fragment>
     <fragment
         android:id="@+id/courseListFragment"
@@ -21,7 +26,8 @@
         tools:layout="@layout/fragment_course_list" >
         <action
             android:id="@+id/action_courseListFragment_to_addCourseFragment"
-            app:destination="@id/addCourseFragment" />
+            app:destination="@id/addCourseFragment"/>
+
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

@@ -8,19 +8,36 @@ import dz.salim.salimi.e_rem.data.repositories.AuthRepository
 import dz.salim.salimi.e_rem.data.repositories.CourseRepository
 import dz.salim.salimi.e_rem.utils.getCurrentTime
 
-class AddCourseViewModel : ViewModel() {
+class AddCourseViewModel (private val courseId: String?): ViewModel() {
 
     private val _course = MutableLiveData<Course>()
     val course : LiveData<Course>
         get() = _course
 
     init {
-        _course.value = Course()
-        _course.value?.creatorId = AuthRepository.LOGGED_IN_USER_UID
+        initCourse()
     }
 
     fun onAddBtnClicked() {
-        _course.value?.createdDate = getCurrentTime()
-        CourseRepository.addCourse(_course.value!!)
+        if (courseId == null) {
+            _course.value?.createdDate = getCurrentTime()
+            CourseRepository.addCourse(_course.value!!)
+        } else {
+            _course.value?.updatedDate = getCurrentTime()
+            CourseRepository.updateCourse(_course.value!!)
+        }
+    }
+
+    private fun initCourse() {
+        if (courseId == null) {
+            _course.value = Course()
+            _course.value?.creatorId = AuthRepository.LOGGED_IN_USER_UID
+        } else {
+            getCourseById()
+        }
+    }
+
+    private fun getCourseById() {
+        CourseRepository.getCourseById(_course, courseId!!)
     }
 }
