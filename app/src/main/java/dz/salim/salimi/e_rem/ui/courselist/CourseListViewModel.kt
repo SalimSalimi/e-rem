@@ -80,7 +80,7 @@ class CourseListViewModel: ViewModel() {
     }
 
     private fun initListCourses() {
-        CourseRepository.getAllCoursesByUserId(_listCourses, AuthRepository.LOGGED_IN_USER_UID)
+        CourseRepository.getAllCoursesByCreatorId(_listCourses, AuthRepository.LOGGED_IN_USER_UID)
     }
 
     private fun deleteCourses() {
