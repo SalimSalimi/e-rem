@@ -11,12 +11,15 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 import dz.salim.salimi.e_rem.R
 import dz.salim.salimi.e_rem.databinding.QuestionFormFragmentBinding
+import dz.salim.salimi.e_rem.ui.exercise.question.OptionsList.OptionListAdapter
 import kotlinx.android.synthetic.main.dialog_custom.*
 
 class QuestionFormFragment : Fragment() {
@@ -39,6 +42,7 @@ class QuestionFormFragment : Fragment() {
         binding.addOptionBtn.setOnClickListener {
             alert()
         }
+        setupRecyclerView()
     }
 
     private fun alert() {
@@ -60,5 +64,13 @@ class QuestionFormFragment : Fragment() {
                 dialog.cancel()
             }
             .show()
+    }
+
+    private fun setupRecyclerView() {
+        val layoutManager = LinearLayoutManager(context)
+
+        val adapter = OptionListAdapter(viewModel.listOptions)
+        binding.optionsListRecycler.layoutManager = layoutManager
+        binding.optionsListRecycler.adapter = adapter
     }
 }

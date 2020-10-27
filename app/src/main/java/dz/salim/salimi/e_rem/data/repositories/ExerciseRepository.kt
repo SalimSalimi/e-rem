@@ -1,7 +1,7 @@
 package dz.salim.salimi.e_rem.data.repositories
 
 import androidx.lifecycle.MutableLiveData
-import dz.salim.salimi.e_rem.data.models.content.Exercise
+import dz.salim.salimi.e_rem.data.models.content.exercise.Exercise
 import dz.salim.salimi.e_rem.data.remote.DataFirebase
 import dz.salim.salimi.e_rem.utils.CREATOR_ID
 import dz.salim.salimi.e_rem.utils.EXERCISE_REF
