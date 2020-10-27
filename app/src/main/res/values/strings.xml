@@ -15,4 +15,10 @@
     <string name="school_name">School Name</string>
     <string name="register">Register</string>
     <string name="click_to_add_new_course_description">Click to Add new Course</string>
+    <string name="type_your_question_here">Type your question here!</string>
+    <string name="points">Points</string>
+    <string name="add_an_option">Add an option</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="correct">Correct?</string>
 </resources>

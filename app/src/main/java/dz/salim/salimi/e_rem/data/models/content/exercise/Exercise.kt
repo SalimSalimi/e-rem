@@ -1,6 +1,8 @@
-package dz.salim.salimi.e_rem.data.models.content
+package dz.salim.salimi.e_rem.data.models.content.exercise
 
-class Exercise (
+import dz.salim.salimi.e_rem.data.models.content.Content
+
+data class Exercise (
     override var id: String = "",
     override var title: String = "",
     override var description: String = "",

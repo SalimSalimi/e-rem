@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/questionFormFragment">
 
     <fragment
         android:id="@+id/addCourseFragment"
@@ -48,4 +48,9 @@
             android:id="@+id/action_registerFragment_to_courseListFragment"
             app:destination="@id/courseListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/questionFormFragment"
+        android:name="dz.salim.salimi.e_rem.ui.exercise.question.QuestionFormFragment"
+        android:label="question_form_fragment"
+        tools:layout="@layout/question_form_fragment" />
 </navigation>
